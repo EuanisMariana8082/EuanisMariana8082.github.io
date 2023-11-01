@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "Euan_"
 author: "Mariana_euan"
@@ -17,3 +18,24 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r pressure, echo=FALSE}
 plot(pressure)
 ```
+=======
+---
+title: "Euan_"
+author: "Mariana_euan"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+>>>>>>> 79a00be16dd12e40b0588d58cc0eb5a74c4a4d11
