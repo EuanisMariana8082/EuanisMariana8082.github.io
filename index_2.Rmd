@@ -14,11 +14,12 @@ Here is my website.
 
 
 ```{r echo=FALSE}
-knitr::include_graphics("./media/burger/png")
+knitr::include_graphics("./media/download(11)/png")
 ```
 
 [Home](http://EuanisMariana8082.github.io/) |[About Me](http://EuanisMariana8082.github.io/about-me)
 
+#000000` for dark mode
 #index.Rmd
 # add a cv file
 # is -l 
