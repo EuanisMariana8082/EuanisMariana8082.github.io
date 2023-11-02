@@ -1,7 +1,5 @@
 # EuanisMariana8082.github.io
 
-#000000` for dark mode
-
 # Welcome to My Website.
 ## Get To Know Me
 ### BIOL 3100 Database Project: Traveling In Time with Bad Bunny 
