@@ -9,9 +9,48 @@ output: html_document
 
 Here is my website. 
 
-**[cv](http://EuanisMariana8082.io)
+**[cv](http://EuanisMariana8082.io/
+
+<<<<<<< HEAD
+---
+title: "Euan_"
+author: "Mariana_euan"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
 
 
+
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+=======
+---
+title: "Euan_"
+author: "Mariana_euan"
+date: '`r Sys.Date()`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
 
 ```{r echo=FALSE}
 knitr::include_graphics("./media/download(11)/png")
@@ -19,7 +58,8 @@ knitr::include_graphics("./media/download(11)/png")
 
 [Home](http://EuanisMariana8082.github.io/) |[About Me](http://EuanisMariana8082.github.io/about-me)
 
-#000000` for dark mode
+[CV](http://EuanisMariana8082.github.io/My_Resume_of_2023.csv)
+ 
 #index.Rmd
 # add a cv file
 # is -l 
@@ -45,10 +85,9 @@ knitr::include_graphics("./media/burger/png")
 ```
 
 [Home](http://EuanisMariana8082.github.io/) |[About Me](http://EuanisMariana8082.github.io/about-me)
+[CV]
 
 #index.Rmd
 # add a cv file
 # is -l 
 
-
->>>>>>> 79a00be16dd12e40b0588d58cc0eb5a74c4a4d11
