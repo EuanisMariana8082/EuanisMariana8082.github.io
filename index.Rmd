@@ -12,8 +12,30 @@ date: '`r Sys.Date()`'
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE) #put packages # use anytime you want to add a picture and a code 
 ```
+ 
 
-is it this part <style> body { background-color: #FF69B4; 
+<style>
+body {
+  background-color: #DDA0DD;
+}
+</style>
+
+<style>
+body {
+  font-family: Georgia, serif;
+}
+</style>
+
+
+ Hi,
+
+Welcome to my website. I created this site for my Biology 3100 course, and it was so much fun to see how a website comes together. My name is Mariana. I hope you enjoy exploring it as much as I enjoyed creating it.
+
+Much love,
+
+Mariana
+
+
 
 
 
