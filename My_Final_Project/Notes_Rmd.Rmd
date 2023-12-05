@@ -1,0 +1,70 @@
+---
+title: "FinalProject.Rmd"
+author: "Mariana_euan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r load_data, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(hrbrthemes)
+library(ggplot2)
+library(gganimate)
+library(wordcloud)
+library(maps)
+library(mapdata)
+
+# Set the file path
+file_path <- "C:/Users/Rushe/EuanisMariana8082.github.io/My_Final_Project/UVST_ALBUM.csv"
+
+# Read the CSV file
+UVST_ALBUM <- read.csv(file_path)
+
+# Convert plays to numeric
+UVST_ALBUM$Plays <- as.numeric(gsub(",", "", UVST_ALBUM$Plays))
+```
+
+scatter plot 
+
+``` {r scatter_plot, include=FALSE}
+# Create a scatter plot
+ggplot(UVST_ALBUM, aes(x = Song.Name, y = Plays)) +
+  geom_point() +
+  scale_y_continuous(labels = scales::comma) +  # Format y-axis labels
+  theme_bw() +
+  theme(panel.grid.major = element_line(size = 1.2, color = "lightpink"),
+        panel.grid.minor = element_line(size = 1.2, color = "lightblue"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))  # Rotate x-axis text
+```
+Word Cloud
+
+``` {r word_cloud, include=FALSE}
+# Create a word cloud
+wordcloud(words = UVST_ALBUM$Song.Name, freq = UVST_ALBUM$Plays, min.freq = 1,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
+Map Plot
+``` {r map_plot, include=FALSE}
+
+# The data
+artist_data <- data.frame(
+  Artist_Name = c("Young Miko", "Mora", "Byrant Myers", "Luar La L", "Yovngchimi", "Eladio Carrion", "feid", "arcangel", "Rafael Castillo", "nengo flow"),
+  monthly_listeners = c(30172477, 25268540, 16082345, 9006894, 10122460, 20951154, 44330186, 25869232, 18421243, 19617966),
+  origin = c("Añasco, Puerto Rico", "Bayamón, Puerto Rico", "Carolina, Puerto Rico", "Carolina, Puerto Rico", "San Juan, Puerto Rico", "Kansas City, MO", "Medellín, Colombia", "East Harlem, New York", "The Bronx, New York", "San Juan, Puerto Rico"),
+  Latitude = c(18.28273, 18.39856, 18.38078, 18.38078, 18.466333, 39.099724, 6.25184, 40.816357, 40.837048, 18.466333),
+  Longitude = c(-67.13962, -66.15572, -65.95739, -65.95739, -66.105721, -94.578331, -75.56359, -73.962898, -73.865433, -66.105721)
+)
+
+# Get world map data
+world_map <- map_data("world")
+
+# Plot the map and points
+ggplot() +
+  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "#D0EBBF", color = "black") +
+  geom_point(data = artist_data, aes(x = Longitude, y = Latitude, color = Artist_Name), size = 3) +
+  coord_fixed(1.3) +
+  scale_color_discrete(name = "Artist Name")
+
+```

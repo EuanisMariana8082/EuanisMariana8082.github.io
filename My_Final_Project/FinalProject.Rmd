@@ -1,14 +1,25 @@
 ---
-title: "FinalProject.Rmd"
-author: "Mariana_euan"
+title: "Exploring Bad Bunny’s Musical Journey: Spotify Streams and Collaborations"
+author: "Mariana_Euan"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
 ---
-# Set the file path
-# Read the CSV file
-# Convert plays to numeric
-```{r load_data, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+<style>
+body {
+  font-family: 'Garamond', serif;
+  background-color: #CEDBF0;
+}
+</style>
+
+
+
+```{r load_data, echo = FALSE,warning = FALSE,message= FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message= FALSE)
 library(hrbrthemes)
 library(ggplot2)
 library(gganimate)
@@ -20,30 +31,99 @@ UVST_ALBUM <- read.csv(file_path)
 UVST_ALBUM$Plays <- as.numeric(gsub(",", "", UVST_ALBUM$Plays))
 ```
 
-scatter plot 
-# Create a scatter plot
-``` {r scatter_plot, include=FALSE}
+
+# scatter plot 
+
+# Un Verano Sin Ti
+This scatter plot is looking at Uno Verano Sin Ti streams from Spotify. 
+Based on the scatter plot of the song “Un Verano Sin Ti” by Bad Bunny on Spotify, here are some observations:
+
+The song has been streamed between 400,000 and 1,600,000 times.
+The highest number of streams appears to be in the Callaita. 
+The lowest number of streams appears to be in the “El Apagon
+The scatter plot shows a wide range of streams across different categories, indicating a diverse listener base for this song.
+```{r scatter_plot, echo = FALSE,warning = FALSE,message= FALSE}
+# Reorder factor levels
+UVST_ALBUM$Song.Name <- factor(UVST_ALBUM$Song.Name, levels = UVST_ALBUM$Song.Name[order(UVST_ALBUM$Plays)])
+
+# Plot
 ggplot(UVST_ALBUM, aes(x = Song.Name, y = Plays)) +
-  geom_point() +
+  geom_point(size = 2) +  # Increase the size of the dots
   scale_y_continuous(labels = scales::comma) +  # Format y-axis labels
   theme_bw() +
-  theme(panel.grid.major = element_line(size = 1.2, color = "lightpink"),
-        panel.grid.minor = element_line(size = 1.2, color = "lightblue"),
-        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))  # Rotate x-axis text
-```
-Word Cloud
-# Create a word cloud
-``` {r word_cloud, include=FALSE}
-wordcloud(words = UVST_ALBUM$Song.Name, freq = UVST_ALBUM$Plays, min.freq = 1,
-          max.words=200, random.order=FALSE, rot.per=0.35, 
-          colors=brewer.pal(8, "Dark2"))
+  theme(panel.grid.major = element_line(size = 1.5, color = "#C8E6BD"),
+        panel.grid.minor = element_line(size = 1.5, color = "#F8C8CA"),
+        axis.text.x = element_text(angle = 90, vjust = 2.0, hjust=1))  # Rotate x-axis labels
+
+
 ```
 
-Map Plot
-# The data
-# Get world map data
-# Plot the map and points
-``` {r map_plot, include=FALSE}
+
+# Nadie Sabe Lo Que Va a Pasar Mañana Streams on Spotify
+ Most streamed so far is Where She Goes. Most of the songs seemed to be at the same level for streaming. It was released on October 13, 2023 so it hasn't been out for long.
+
+```{r scatter_NSLQVPM, echo = FALSE,warning = FALSE,message= FALSE}
+# Load necessary libraries
+library(ggplot2)
+library(scales)
+
+# Read the file
+NSLQVAPM_ALBUM <- read.csv("C:\\Users\\Rushe\\EuanisMariana8082.github.io\\My_Final_Project\\NSLQVAPM_ALBUM.csv")
+
+# Convert plays to numeric
+NSLQVAPM_ALBUM$Plays <- as.numeric(gsub(",", "", NSLQVAPM_ALBUM$Plays))
+
+# Reorder the levels of Name.of.Song based on Plays
+NSLQVAPM_ALBUM$Name.of.Song <- factor(NSLQVAPM_ALBUM$Name.of.Song, levels = NSLQVAPM_ALBUM$Name.of.Song[order(NSLQVAPM_ALBUM$Plays)])
+
+# Create a scatter plot
+ggplot(NSLQVAPM_ALBUM, aes(x = Name.of.Song, y = Plays)) +
+  geom_point(size = 4) +  # Increase the size of the points
+  scale_y_continuous(labels = scales::comma) +  # Format y-axis labels
+  theme_bw() +
+  theme(panel.grid.major = element_line(size = 2.5, color = "#FFE4CD"),
+        panel.grid.minor = element_line(size = 2.3, color = "#D9E6F7"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))  # Rotate x-axis text
+
+
+```
+
+# Word Cloud 
+
+
+ Un Verano Sin Ti Name of Songs
+
+```{r word_cloud, echo = FALSE,warning = FALSE,message= FALSE}
+wordcloud(words = UVST_ALBUM$Song.Name, freq = UVST_ALBUM$Plays, min.freq = 1,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=c("#FFC5D0", "#9AE1E1", "#F4C6EF"))
+```
+ 
+ 
+Nadie Sabe Lo Que Va a Pasar Mañana  Name of Songs 
+
+```{r word_cloud_2, echo = FALSE,warning = FALSE,message= FALSE}
+# Load necessary libraries
+library(wordcloud)
+library(RColorBrewer)
+
+# Read the file
+NSLQVAPM_ALBUM <- read.csv("C:\\Users\\Rushe\\EuanisMariana8082.github.io\\My_Final_Project\\NSLQVAPM_ALBUM.csv")
+
+# Convert plays to numeric
+NSLQVAPM_ALBUM$Plays <- as.numeric(gsub(",", "", NSLQVAPM_ALBUM$Plays))
+
+# Create a word cloud
+wordcloud(words = NSLQVAPM_ALBUM$Name.of.Song, freq = NSLQVAPM_ALBUM$Plays, min.freq = 4,
+          max.words=200, random.order=FALSE, rot.per=0.35, scale=c(1.5,1.5),
+          colors=brewer.pal(8, "Dark2"))
+
+```
+
+# Map Plot 
+
+```{r map_plot, echo = FALSE,warning = FALSE,message= FALSE}
+# Data
 artist_data <- data.frame(
   Artist_Name = c("Young Miko", "Mora", "Byrant Myers", "Luar La L", "Yovngchimi", "Eladio Carrion", "feid", "arcangel", "Rafael Castillo", "nengo flow"),
   monthly_listeners = c(30172477, 25268540, 16082345, 9006894, 10122460, 20951154, 44330186, 25869232, 18421243, 19617966),
@@ -51,13 +131,50 @@ artist_data <- data.frame(
   Latitude = c(18.28273, 18.39856, 18.38078, 18.38078, 18.466333, 39.099724, 6.25184, 40.816357, 40.837048, 18.466333),
   Longitude = c(-67.13962, -66.15572, -65.95739, -65.95739, -66.105721, -94.578331, -75.56359, -73.962898, -73.865433, -66.105721)
 )
+
+# Capitalize artist names
+artist_data$Artist_Name <- toupper(artist_data$Artist_Name)
+
+# Get world map data
 world_map <- map_data("world")
+
+# Plot
 ggplot() +
-  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "#D0EBBF", color = "black") +
-  geom_point(data = artist_data, aes(x = Longitude, y = Latitude, color = Artist_Name), size = 3) +
-  coord_fixed(1.3) +
-  scale_color_discrete(name = "Artist Name")
+  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "#FFAEB9", color = "#3ABCBF") +
+  geom_point(data = artist_data, aes(x = Longitude, y = Latitude, color = Artist_Name), size = 4) +
+  coord_fixed(1.8) +
+  scale_color_discrete(name = "Artist Name") +
+  theme_minimal() +
+  labs(x = "Longitude", y = "Latitude")  # Add this line to change the axis labels
+
 
 ```
 
+
+This plot is a geographical representation of the origins of various artists. Each point on the map corresponds to an artist, and the location of the point indicates the origin of the artist. The artists represented in this plot include Young Miko, Mora, Byrant Myers, Luar La L, Yovngchimi, Eladio Carrion, Feid, Arcangel, Rafael Castillo, and Nengo Flow.
+
+Here’s a more detailed breakdown:
+
+Young Miko is from Añasco, Puerto Rico.
+Mora is from Bayamón, Puerto Rico.
+Byrant Myers is from Carolina, Puerto Rico.
+Luar La L is also from Carolina, Puerto Rico.
+Yovngchimi is from San Juan, Puerto Rico.
+Eladio Carrion is from Kansas City, MO, United States.
+Feid is from Medellín, Colombia.
+Arcangel is from East Harlem, New York, United States.
+Rafael Castillo is from The Bronx, New York, United States.
+Nengo flow is from San Juan, Puerto Rico.
+
+The color coding of the points allows us to distinguish between the artists. This plot provides a visual way to understand the geographical distribution of these artists’ origins. It shows that these artists come from diverse locations, with a concentration in the Americas. This diversity might be reflected in their music, influencing their style and the themes they explore.
+
+#FFAEB9
+
+#A8E1B7
+
+
+```{r map_2, echo = FALSE,warning = FALSE,message= FALSE}
+#
+
+```
 
