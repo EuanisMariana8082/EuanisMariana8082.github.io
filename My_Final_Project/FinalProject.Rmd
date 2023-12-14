@@ -31,17 +31,51 @@ UVST_ALBUM$Plays <- as.numeric(gsub(",", "", UVST_ALBUM$Plays))
 ```
 
 
-# Scatter Plot 
+# Introduction to Data:
 
-# Un Verano Sin Ti
+I gathered data on Spotify about Bad Bunny's music streams in specific of Un Verano Sin Ti and Nadie Sabe Lo Que Va a Pasar Mañana albums.
 
+I created 3 datasets:  
 
+One being Un Verano Sin Ti name of songs and the number of streams for each song  
+
+The second one Nadie Sabe Lo Que Va a Pasar Mañana name of songs and the number of streams for each song 
+
+And lastly gathered data on Bad Bunny collaborations. I looked at the region where these artists were born.  
+
+# Packages Used:
+library(ggplot2)
+
+library(scales)
+
+library(wordcloud)
+
+library(RColorBrewer)
+
+library(hrbrthemes)
+
+library(ggplot2)
+
+library(gganimate)
+
+library(wordcloud)
+
+library(maps)
+
+library(mapdata)
+
+library(plotly)
+
+# Scatter Plots on Albums:
+
+# Un Verano Sin Ti:
 This scatter plot is looking at Un Verano Sin Ti streams from Spotify. 
 Based on the scatter plot of the song “Un Verano Sin Ti” by Bad Bunny on Spotify, here are some observations:
 
 The song has been streamed between 400,000 and 1,600,000 times.
 The highest number of streams appears to be in the Me Porto Bonito. 
 The lowest number of streams appears to be in the El Apagon
+
 
 ```{r scatter_plot, echo = FALSE,warning = FALSE,message= FALSE}
 # Reorder factor levels
@@ -59,9 +93,67 @@ ggplot(UVST_ALBUM, aes(x = Song.Name, y = Plays)) +
 
 ```
 
+Name of Song              Plays
 
-# Nadie Sabe Lo Que Va a Pasar Mañana Streams on Spotify
- Most streamed so far is Where She Goes. Most of the songs seemed to be at the same level for streaming. It was released on October 13, 2023 so it hasn't been out for long.
+1 Despues de la Playa    492,310,605
+
+2     Me Porto Bonito  1,581,978,797
+
+3          Mi Pregunto 1,362,700,167
+
+4            Un Ratito   448,592,834
+
+5     Yo No Soy Celoso   333,039,556
+
+6                Tarot   659,113,271
+
+
+
+
+
+Here’s a brief explanation of the output:
+
+
+
+
+vars: The number of variables (1).
+
+n: The number of observations (23).
+
+mean: The mean (average) of the Plays column (644,137,315).
+
+sd: The standard deviation of the Plays column (417,262,751).
+
+median: The median of the Plays column (455,069,076).
+
+trimmed: The trimmed mean of the Plays column (598,480,206).
+
+mad: The median absolute deviation of the Plays column (223,216,557).
+
+min: The minimum value in the Plays column (225,592,089).
+
+max: The maximum value in the Plays column (1,581,978,797).
+
+range: The range of the Plays column (1,356,386,708).
+
+skew: The skewness of the Plays column (0.93).
+
+kurtosis: The kurtosis of the Plays column (-0.66).
+
+se: The standard error of the Plays column (87,005,298).
+
+
+
+ 
+# Nadie Sabe Lo Que Va a Pasar Mañana 
+
+Streams on Spotify
+
+Most streamed is Where She Goes. 
+
+Most of the songs seemed to be at the same streams.
+
+The albums was released on October 13, 2023 streams will be going up. 
 
 ```{r scatter_NSLQVPM, echo = FALSE,warning = FALSE,message= FALSE}
 # Load necessary libraries
@@ -89,8 +181,98 @@ ggplot(NSLQVAPM_ALBUM, aes(x = Name.of.Song, y = Plays)) +
 
 ```
 
-### Word Cloud 
 
+
+
+
+
+The output is a list of summary statistics for each song. Here’s a brief explanation
+of the output for each song:
+
+
+EUROPA: The number of plays is 13,875.
+
+
+
+BATICANO: The number of plays is approximately 27,000,000.
+
+
+
+ACHO PR: The number of plays is 28,065,113.
+
+
+
+VOU787: The number of plays is 29,962,926.
+
+
+VUELVE CANDY B: The number of plays is 31,900,277.
+
+
+NO ME QUIERO CASAR: The number of plays is 32,551,764.
+
+
+THUNDER LIGHTING: The number of plays is 34,093,252.
+
+
+GRACIAS POR NADA: The number of plays is 34,782,550.
+
+
+
+LOS PITS: The number of plays is 35,152,926.
+
+
+
+
+
+For each song, the minimum, 1st quartile, median, mean, 3rd quartile, and maximum number of plays are the same because there’s only one observation per song in my data frame.
+
+
+ Name.of.Song        Plays          
+ EUROPA            : 1    Min.   :    13875  
+ BATICANO          : 1    1st Qu.: 32937136  
+ ACHO PR           : 1    Median : 40911670  
+ VOU787            : 1    Mean   : 75256571  
+ VUELVE CANDY B    : 1    3rd Qu.: 60213702  
+ NO ME QUIERO CASAR: 1    Max.   :557032659  
+ (Other)           :16     
+
+
+
+
+
+ Here’s a brief explanation of the output:
+ 
+ 
+
+Name.of.Song: This is the name of the song. The output shows that there are 22 songs in total in your data frame, with 16 of them falling into the “Other” category.
+
+
+
+Plays: This is the number of plays for each song.
+
+
+Min.: The minimum number of plays across all songs (13,875).
+
+
+1st Qu.: The first quartile (25th percentile) of the number of plays (32,937,136).
+
+
+Median: The median (50th percentile) of the number of plays (40,911,670).
+
+
+Mean: The average number of plays (75,256,571).
+
+
+3rd Qu.: The third quartile (75th percentile) of the number of plays (60,213,702).
+
+
+Max.: The maximum number of plays (557,032,659).
+
+
+
+
+
+### Word Cloud 
 
  Un Verano Sin Ti Name of Songs
 
@@ -121,7 +303,7 @@ wordcloud(words = NSLQVAPM_ALBUM$Name.of.Song, freq = NSLQVAPM_ALBUM$Plays, min.
 
 ```
 
-# Map Plot
+# Map Plot:
 ```{r map_2, echo = FALSE,warning = FALSE,message= FALSE}
 # Load necessary libraries
 library(plotly)
@@ -189,3 +371,36 @@ Nengo flow is from San Juan, Puerto Rico.
 
 The color coding of the points allows us to distinguish between the artists. This plot provides a visual way to understand the geographical distribution of these artists’ origins. It shows that these artists come from diverse locations, with a concentration in the Americas. This diversity might be reflected in their music, influencing their style and the themes they explore.
 
+# Conclusion:
+
+NSLQVAPM_ALBUM:
+
+
+The number of plays for the songs in this dataset ranges from a minimum of 13,875 to a maximum of 557,032,659, indicating a wide range of popularity.
+
+The average (mean) number of plays is approximately 75,256,571, while the median is 40,911,670. 
+The mean being greater than the median suggests that the distribution of plays is skewed to the right.
+
+The standard deviation is approximately 113,210,770, indicating a high variability in the number of plays across the songs.
+
+Some songs have a relatively low number of plays, while others have a much higher number of plays, suggesting varying levels of popularity.
+
+
+UVST_ALBUM:
+
+
+The number of plays for the songs in this dataset ranges from a minimum of 225,592,089 to a maximum of 1,581,978,797, indicating a wide range of popularity.
+
+The average (mean) number of plays is approximately 644,137,315, while the median is 455,069,076. 
+The mean being greater than the median suggests that the distribution of plays is skewed to the right.
+
+The standard deviation is approximately 417,262,751, indicating a high variability in the number of plays across the songs.
+
+
+Some songs have a relatively low number of plays, while others have a much higher number of plays, suggesting varying levels of popularity.
+
+
+MAP:
+
+
+In mapping out the artist’s collaborations, it’s evident that a significant number of his collaborators are of Puerto Rican descent. Although many of these artists were born in Puerto Rico, they have since relocated to various other countries.
